@@ -482,3 +482,8 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# SQLite veritabani dosyalari (repoya konmaz)
+*.db
+*.db-shm
+*.db-wal
