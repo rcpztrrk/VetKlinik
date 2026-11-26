@@ -1,0 +1,52 @@
+@model IEnumerable<VetKlinik.Models.Hizmet>
+@{
+    ViewData["Title"] = "Hizmetler";
+    bool adminMi = User.IsInRole("Admin");
+}
+
+<h1>Hizmetler</h1>
+
+@if (TempData["Mesaj"] != null)
+{
+    <div class="alert alert-success">@TempData["Mesaj"]</div>
+}
+@if (TempData["Hata"] != null)
+{
+    <div class="alert alert-danger">@TempData["Hata"]</div>
+}
+
+@if (adminMi)
+{
+    <p><a asp-action="Create" class="btn btn-primary">Yeni Hizmet Ekle</a></p>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Hizmet</th>
+            <th>Süre</th>
+            <th>Ücret</th>
+            @if (adminMi)
+            {
+                <th></th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var h in Model)
+        {
+            <tr>
+                <td>@h.Ad</td>
+                <td>@h.SureDakika dk</td>
+                <td>@h.Ucret.ToString("0.##") TL</td>
+                @if (adminMi)
+                {
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@h.Id" class="btn btn-sm btn-outline-secondary">Düzenle</a>
+                        <a asp-action="Delete" asp-route-id="@h.Id" class="btn btn-sm btn-outline-danger">Sil</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

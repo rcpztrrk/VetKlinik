@@ -1,4 +1,6 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using VetKlinik.Data;
 
@@ -41,6 +43,18 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+// Türkçe kültür ama ondalık ayırıcı nokta: formdaki "350.50" gibi değerler doğru okunsun
+var kultur = new CultureInfo("tr-TR");
+kultur.NumberFormat.NumberDecimalSeparator = ".";
+kultur.NumberFormat.NumberGroupSeparator = ",";
+kultur.NumberFormat.CurrencyDecimalSeparator = ".";
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(kultur),
+    SupportedCultures = new[] { kultur },
+    SupportedUICultures = new[] { kultur }
+});
 
 app.UseHttpsRedirection();
 app.UseRouting();

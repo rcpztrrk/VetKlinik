@@ -1,0 +1,21 @@
+@model VetKlinik.Models.Hizmet
+@{
+    ViewData["Title"] = "Hizmeti Düzenle";
+}
+
+<h1>Hizmeti Düzenle</h1>
+
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <partial name="_HizmetFormu" model="Model" />
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <a asp-action="Index" class="btn btn-link">Geri dön</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

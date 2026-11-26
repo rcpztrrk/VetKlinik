@@ -1,0 +1,38 @@
+@page
+@model VetKlinik.Areas.Identity.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Üye Ol";
+}
+
+<h1>Üye Ol</h1>
+<p>Evcil hayvanlarını kaydetmek ve randevu almak için üye ol.</p>
+
+<div class="row">
+    <div class="col-md-5">
+        <form method="post" asp-route-returnUrl="@Model.ReturnUrl">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Girdi.Email" class="form-label"></label>
+                <input asp-for="Girdi.Email" class="form-control" autocomplete="username" />
+                <span asp-validation-for="Girdi.Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Girdi.Sifre" class="form-label"></label>
+                <input asp-for="Girdi.Sifre" class="form-control" autocomplete="new-password" />
+                <span asp-validation-for="Girdi.Sifre" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Girdi.SifreTekrar" class="form-label"></label>
+                <input asp-for="Girdi.SifreTekrar" class="form-control" autocomplete="new-password" />
+                <span asp-validation-for="Girdi.SifreTekrar" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

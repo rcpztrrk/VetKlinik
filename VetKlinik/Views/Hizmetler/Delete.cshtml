@@ -1,0 +1,23 @@
+@model VetKlinik.Models.Hizmet
+@{
+    ViewData["Title"] = "Hizmeti Sil";
+}
+
+<h1>Hizmeti Sil</h1>
+
+<div class="alert alert-warning">Bu hizmeti silmek istediğine emin misin?</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Hizmet</dt>
+    <dd class="col-sm-9">@Model.Ad</dd>
+    <dt class="col-sm-3">Süre</dt>
+    <dd class="col-sm-9">@Model.SureDakika dk</dd>
+    <dt class="col-sm-3">Ücret</dt>
+    <dd class="col-sm-9">@Model.Ucret.ToString("0.##") TL</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-link">Vazgeç</a>
+</form>
