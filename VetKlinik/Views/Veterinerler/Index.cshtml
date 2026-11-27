@@ -1,0 +1,54 @@
+@model IEnumerable<VetKlinik.Models.Veteriner>
+@{
+    ViewData["Title"] = "Veteriner Hekimler";
+    bool adminMi = User.IsInRole("Admin");
+}
+
+<h1>Veteriner Hekimler</h1>
+
+@if (TempData["Mesaj"] != null)
+{
+    <div class="alert alert-success">@TempData["Mesaj"]</div>
+}
+@if (TempData["Hata"] != null)
+{
+    <div class="alert alert-danger">@TempData["Hata"]</div>
+}
+
+@if (adminMi)
+{
+    <p><a asp-action="Create" class="btn btn-primary">Yeni Hekim Ekle</a></p>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ad Soyad</th>
+            <th>Uzmanlık</th>
+            <th>Mesai</th>
+            <th>Hizmetler</th>
+            @if (adminMi)
+            {
+                <th></th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.AdSoyad</td>
+                <td>@v.Uzmanlik</td>
+                <td>@v.BaslangicSaati.ToString("HH:mm") - @v.BitisSaati.ToString("HH:mm")</td>
+                <td>@string.Join(", ", v.Hizmetler.Select(h => h.Ad))</td>
+                @if (adminMi)
+                {
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@v.Id" class="btn btn-sm btn-outline-secondary">Düzenle</a>
+                        <a asp-action="Delete" asp-route-id="@v.Id" class="btn btn-sm btn-outline-danger">Sil</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

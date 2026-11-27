@@ -1,0 +1,25 @@
+@model VetKlinik.Models.Veteriner
+@{
+    ViewData["Title"] = "Hekimi Sil";
+}
+
+<h1>Hekimi Sil</h1>
+
+<div class="alert alert-warning">Bu hekimi ve giriş hesabını silmek istediğine emin misin?</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Ad Soyad</dt>
+    <dd class="col-sm-9">@Model.AdSoyad</dd>
+    <dt class="col-sm-3">Uzmanlık</dt>
+    <dd class="col-sm-9">@Model.Uzmanlik</dd>
+    <dt class="col-sm-3">Mesai</dt>
+    <dd class="col-sm-9">@Model.BaslangicSaati.ToString("HH:mm") - @Model.BitisSaati.ToString("HH:mm")</dd>
+    <dt class="col-sm-3">Hizmetler</dt>
+    <dd class="col-sm-9">@string.Join(", ", Model.Hizmetler.Select(h => h.Ad))</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-link">Vazgeç</a>
+</form>

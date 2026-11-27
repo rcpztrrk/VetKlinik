@@ -1,0 +1,41 @@
+@model VetKlinik.Models.Veteriner
+@{
+    var hizmetler = (List<VetKlinik.Models.Hizmet>)ViewBag.Hizmetler;
+    var secilenler = (List<int>)ViewBag.Secilenler;
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="mb-3">
+    <label asp-for="AdSoyad" class="form-label"></label>
+    <input asp-for="AdSoyad" class="form-control" />
+    <span asp-validation-for="AdSoyad" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Uzmanlik" class="form-label"></label>
+    <input asp-for="Uzmanlik" class="form-control" placeholder="Küçük hayvan, egzotik hayvan, cerrahi..." />
+    <span asp-validation-for="Uzmanlik" class="text-danger"></span>
+</div>
+<div class="row">
+    <div class="col mb-3">
+        <label asp-for="BaslangicSaati" class="form-label"></label>
+        <input asp-for="BaslangicSaati" class="form-control" type="time" />
+    </div>
+    <div class="col mb-3">
+        <label asp-for="BitisSaati" class="form-label"></label>
+        <input asp-for="BitisSaati" class="form-control" type="time" />
+        <span asp-validation-for="BitisSaati" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Verebildiği Hizmetler</label>
+    @foreach (var h in hizmetler)
+    {
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="secilenHizmetler" value="@h.Id" id="hizmet_@h.Id"
+                   @(secilenler.Contains(h.Id) ? "checked" : "") />
+            <label class="form-check-label" for="hizmet_@h.Id">@h.Ad</label>
+        </div>
+    }
+</div>

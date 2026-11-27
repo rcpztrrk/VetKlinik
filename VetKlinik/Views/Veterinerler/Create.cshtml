@@ -1,0 +1,31 @@
+@model VetKlinik.Models.Veteriner
+@{
+    ViewData["Title"] = "Yeni Hekim";
+}
+
+<h1>Yeni Hekim</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <partial name="_VeterinerFormu" model="Model" />
+
+            <h5 class="mt-4">Hekimin giriş bilgileri</h5>
+            <div class="mb-3">
+                <label class="form-label" for="email">E-posta</label>
+                <input class="form-control" type="email" id="email" name="email" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="sifre">Şifre</label>
+                <input class="form-control" type="password" id="sifre" name="sifre" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <a asp-action="Index" class="btn btn-link">Geri dön</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
